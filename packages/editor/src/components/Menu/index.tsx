@@ -169,6 +169,7 @@ function EditorMenu(props: Props) {
   const clickLoom = useCallback(() => command(CommandNames.loom), [command]);
   const clickMiro = useCallback(() => command(CommandNames.miro), [command]);
   const clickIframe = useCallback(() => command(CommandNames.iframe), [command]);
+  const clickTaskList = useCallback(() => command(CommandNames.task_list), [command]);
 
   return (
     <Grid
@@ -305,6 +306,9 @@ function EditorMenu(props: Props) {
                 action={clickIframe}
                 title="Embed an IFrame"
               />
+            )}
+            {schema?.nodes.task_item && (
+              <MenuAction kind="iframe" disabled={off} action={clickTaskList} title="TaskItem" />
             )}
           </div>
         </Menu>

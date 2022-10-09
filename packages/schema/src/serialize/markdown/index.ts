@@ -55,6 +55,8 @@ const mdNodes: MarkdownSerializerParameters[0] = {
   list_item(state, node) {
     state.renderInline(node);
   },
+  task_item: nodes.TaskItem.toMarkdown,
+  task_list: nodes.TaskList.toMarkdown,
   // Presentational
   image: nodes.Image.toMarkdown,
   figure: nodes.Figure.toMarkdown,

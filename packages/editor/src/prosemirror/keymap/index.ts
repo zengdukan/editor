@@ -117,6 +117,18 @@ function addAllCommands(stateKey: any, schema: Schema, bind: AddKey, options?: C
     }
   }
 
+  if (schema.nodes.task_item) {
+    bind('Enter', splitListItem(schema.nodes.task_item));
+    const cmdLift = liftListItem(schema.nodes.task_item);
+    const cmdSink = sinkListItem(schema.nodes.task_item);
+    bind('Mod-[', cmdLift);
+    bind('Mod-]', cmdSink);
+    if (options?.captureTab ?? true) {
+      bind('Shift-Tab', cmdLift);
+      bind('Tab', cmdSink);
+    }
+  }
+
   if (schema.nodes.paragraph) bind('Mod-Alt-0', setBlockType(schema.nodes.paragraph));
 
   if (schema.nodes.heading) {

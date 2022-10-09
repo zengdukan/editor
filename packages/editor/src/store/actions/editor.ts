@@ -150,7 +150,8 @@ export function wrapIn(node: NodeType): AppThunk<boolean> {
     if (editor.state == null || !editor.key) return false;
     const isList =
       node === editor.state.schema.nodes.ordered_list ||
-      node === editor.state.schema.nodes.bullet_list;
+      node === editor.state.schema.nodes.bullet_list ||
+      node === editor.state.schema.nodes.task_list;
     if (isList) {
       const { viewId } = getEditorUI(getState());
       return dispatch(wrapInList(editor.key, viewId, node));

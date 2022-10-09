@@ -22,6 +22,8 @@ export enum nodeNames {
   ordered_list = 'ordered_list',
   bullet_list = 'bullet_list',
   list_item = 'list_item',
+  task_item = 'task_item',
+  task_list = 'task_list',
   aside = 'aside',
   callout = 'callout',
   iframe = 'iframe',

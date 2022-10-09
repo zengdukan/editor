@@ -218,6 +218,10 @@ export function executeCommand(
         removeText();
         dispatch(actions.wrapIn(schema.nodes.ordered_list));
         return true;
+      case CommandNames.task_list:
+        removeText();
+        dispatch(actions.wrapIn(schema.nodes.task_list));
+        return true;
       case CommandNames.emoji:
         removeText();
         openAutocomplete(view, ':');

@@ -1,0 +1,33 @@
+ul.task_list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 -24px;
+}
+
+ul.task_list li {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+}
+
+ul.task_list li > div {
+  width: 100%;
+}
+
+ul.task_list li.checked > div > p {
+  color: var(--theme-primary);
+  text-decoration: line-through;
+}
+
+ul.task_list li::before {
+  left: 0;
+}
+
+ul.task_list li input {
+  cursor: pointer;
+  pointer-events: initial;
+  opacity: 1;
+  margin: 0.5em 0.5em 0 0;
+  width: 14px;
+  height: 14px;
+}
