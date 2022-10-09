@@ -10,6 +10,8 @@ export * as Table from './table';
 export * as Footnote from './footnote';
 export * as Mention from './mention';
 export * as LinkBlock from './linkBlock';
+export * as TaskItem from './taskitem';
+export * as TaskList from './tasklist';
 
 // Figures and Captions
 export * as Figure from './figure';

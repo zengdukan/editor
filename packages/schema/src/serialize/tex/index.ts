@@ -88,6 +88,8 @@ export const texSerializer = new MarkdownSerializer(
     list_item(state, node) {
       state.renderInline(node);
     },
+    task_item: nodes.TaskItem.toTex,
+    task_list: nodes.TaskList.toTex,
     image: nodes.Image.toTex,
     figure: nodes.Figure.toTex,
     figcaption: nodes.Figcaption.toTex,

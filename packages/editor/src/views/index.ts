@@ -9,6 +9,7 @@ import { CodeBlockView } from './CodeBlockView';
 import { FootnoteView } from './FootnoteView';
 import createNodeView from './NodeView';
 import WidgetView, { newWidgetView } from './WidgetView';
+import { TaskItemView } from './TaskItemView';
 import { clickSelectFigure } from './utils';
 
 export type { NodeViewProps, GetPos } from './types';
@@ -29,4 +30,5 @@ export default {
   newWidgetView,
   CodeBlockView,
   FootnoteView,
+  TaskItemView,
 };

@@ -309,6 +309,20 @@ const handlers: Record<string, TokenHandler> = {
   linkBlock: () => ({
     name: nodeNames.link_block,
   }),
+  taskItem: (token) => {
+    let { children } = token;
+    if (token.children?.length === 1 && token.children[0].type === 'text') {
+      children = [{ type: 'paragraph', children }];
+    }
+    return {
+      name: nodeNames.task_item,
+      children,
+    };
+  },
+  taskList: (token) => ({
+    name: nodeNames.task_list,
+    children: token.children,
+  }),
 };
 
 export function fromMdast(tree: Root, useSchema: UseSchema): ProsemirrorNode {

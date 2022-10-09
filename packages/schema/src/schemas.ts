@@ -9,6 +9,8 @@ export const listNodes = {
   ordered_list: basic.ordered_list,
   bullet_list: basic.bullet_list,
   list_item: basic.list_item,
+  task_item: Nodes.TaskItem.default,
+  task_list: Nodes.TaskList.default,
 };
 
 export const presentationalNodes = {

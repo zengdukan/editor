@@ -13,6 +13,7 @@ export enum CommandNames {
   'horizontal_rule' = 'horizontal_rule',
   'bullet_list' = 'bullet_list',
   'ordered_list' = 'ordered_list',
+  'task_list' = 'task_list',
   'emoji' = 'emoji',
   'paragraph' = 'paragraph',
   'heading1' = 'heading1',
@@ -129,6 +130,13 @@ const BULLET_LIST_COMMAND: CommandResult = {
   description: 'Insert an unordered list',
   shortcut: 'Mod-Shift-8',
   available: nodeInSchema(nodeNames.bullet_list),
+};
+const TASK_LIST_COMMAND: CommandResult = {
+  name: CommandNames.task_list,
+  title: 'Task list',
+  description: 'Insert an task list',
+  shortcut: 'Mod-Shift-9',
+  available: nodeInSchema(nodeNames.task_list),
 };
 const CITATION_COMMAND: CommandResult = {
   name: CommandNames.citation,
@@ -282,6 +290,7 @@ export const ALL_COMMANDS: CommandResult[] = [
   },
   ORDERED_LIST_COMMAND,
   BULLET_LIST_COMMAND,
+  TASK_LIST_COMMAND,
   CITATION_COMMAND,
   {
     name: CommandNames.link_block,

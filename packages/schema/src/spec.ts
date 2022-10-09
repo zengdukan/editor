@@ -180,3 +180,14 @@ export type Variable = {
   valueFunction?: string;
   format?: string;
 };
+
+export type TaskItem = {
+  type: 'taskItem';
+  checked: boolean;
+  children?: (PhrasingContent | FlowContent)[];
+};
+
+export type TaskList = {
+  type: 'taskList';
+  children?: TaskItem[];
+};
