@@ -323,6 +323,10 @@ const handlers: Record<string, TokenHandler> = {
     name: nodeNames.task_list,
     children: token.children,
   }),
+  mermaid: (token) => ({
+    name: nodeNames.mermaid,
+    children: token.value,
+  }),
 };
 
 export function fromMdast(tree: Root, useSchema: UseSchema): ProsemirrorNode {

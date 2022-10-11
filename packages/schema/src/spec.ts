@@ -5,6 +5,7 @@ import type {
   Heading as SpecHeading,
   TableCell as SpecTableCell,
   StaticPhrasingContent,
+  Code,
 } from 'myst-spec';
 
 export {
@@ -191,3 +192,5 @@ export type TaskList = {
   type: 'taskList';
   children?: TaskItem[];
 };
+
+export type Mermaid = Code & OptionalNumbered;

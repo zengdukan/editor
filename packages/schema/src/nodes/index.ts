@@ -22,6 +22,7 @@ export * as Cite from './cite';
 export * as CiteGroup from './cite-group';
 export * as Math from './math';
 export * as Equation from './equation';
+export * as Mermaid from './mermaid';
 
 // Reactive
 export * as Variable from './reactive/variable';

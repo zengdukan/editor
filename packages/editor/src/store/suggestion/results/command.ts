@@ -234,6 +234,10 @@ export function executeCommand(
         removeText();
         dispatch(replaceOrInsert(schema.nodes.equation, { id: createId() }));
         return true;
+      case CommandNames.mermaid:
+        removeText();
+        dispatch(replaceOrInsert(schema.nodes.mermaid, { id: createId() }));
+        return true;
       case CommandNames.code:
         removeText();
         dispatch(

@@ -71,6 +71,7 @@ export const textSerializer = new MarkdownSerializer(
     cite: nodes.Cite.toMarkdown, // TODO: fix this
     cite_group: nodes.CiteGroup.toMarkdown, // TODO: fix this
     mention: nodes.Mention.toMarkdown,
+    mermaid: nodes.Mermaid.toMarkdown,
     // Tables
     table: nodes.Table.toGFMMarkdownTable,
     // Dynamic

@@ -1,0 +1,43 @@
+.ProseMirror-hideselection .mermaid .editor *::selection {
+  background-color: transparent;
+}
+.ProseMirror-hideselection .mermaid .editor *::-moz-selection {
+  background-color: transparent;
+}
+
+.mermaid .render {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.mermaid.editing .render {
+  display: none;
+}
+.mermaid .editor {
+  display: none;
+}
+.mermaid.editing .editor {
+  width: 100%;
+  display: inline-block;
+}
+
+.mermaid .editor.ProseMirror {
+  cursor: auto;
+  font-family: monospace;
+  color: purple;
+}
+
+@keyframes blinkCursor {
+  0% {
+    border-color: purple;
+  }
+  49% {
+    border-color: purple;
+  }
+  50% {
+    border-color: #fff;
+  }
+  99% {
+    border-color: #fff;
+  }
+}
