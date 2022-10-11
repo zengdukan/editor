@@ -47,6 +47,7 @@ export enum CommandNames {
   'link_code' = 'link_code',
   'link_table' = 'link_table',
   'image' = 'image',
+  'mermaid' = 'mermaid',
 
   // Table
   'insert_table' = 'insert_table',
@@ -449,5 +450,11 @@ export const ALL_COMMANDS: CommandResult[] = [
     title: 'IFrame',
     description: 'Embed an IFrame',
     available: nodeInSchema(nodeNames.iframe),
+  },
+  {
+    name: CommandNames.mermaid,
+    title: 'Mermaid',
+    description: 'Add mermaid flowchart',
+    available: nodeInSchema(nodeNames.mermaid),
   },
 ];

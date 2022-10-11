@@ -73,6 +73,7 @@ const mdNodes: MarkdownSerializerParameters[0] = {
   cite: nodes.Cite.toMarkdown,
   cite_group: nodes.CiteGroup.toMarkdown,
   mention: nodes.Mention.toMarkdown,
+  mermaid: nodes.Mermaid.toMarkdown,
   // Tables
   table: nodes.Table.toMarkdown,
   // Dynamic

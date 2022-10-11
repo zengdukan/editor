@@ -56,6 +56,7 @@ export const nodes = {
   heading: Nodes.Heading.default,
   footnote: Nodes.Footnote.default,
   blockquote: basic.blockquote,
+  mermaid: Nodes.Mermaid.default,
   code_block: Nodes.Code.default,
   figure: Nodes.Figure.default,
   figcaption: Nodes.Figcaption.default,

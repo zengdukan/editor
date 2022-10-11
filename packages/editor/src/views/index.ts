@@ -11,6 +11,7 @@ import createNodeView from './NodeView';
 import WidgetView, { newWidgetView } from './WidgetView';
 import { TaskItemView } from './TaskItemView';
 import { clickSelectFigure } from './utils';
+import { MermaidView } from './MermaidView';
 
 export type { NodeViewProps, GetPos } from './types';
 
@@ -31,4 +32,5 @@ export default {
   CodeBlockView,
   FootnoteView,
   TaskItemView,
+  MermaidView,
 };
