@@ -57,6 +57,7 @@ export const textSerializer = new MarkdownSerializer(
     },
     task_item: nodes.TaskItem.toMarkdown,
     task_list: nodes.TaskList.toMarkdown,
+    toc: newLine,
     // Presentational
     image: newLine,
     iframe: newLine,

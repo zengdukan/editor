@@ -8,10 +8,12 @@ import {
   readBooleanAttr,
   setNumberedAttrs,
 } from './utils';
+import { createId } from '../utils';
 
 const getAttrs = (level: number) => (dom: HTMLElement) => ({
   ...getNumberedAttrs(dom),
   level,
+  id: createId(),
 });
 
 export type Attrs = NumberedNode & {
@@ -35,7 +37,11 @@ const heading: MyNodeSpec<Attrs, Heading> = {
     { tag: 'h6', getAttrs: getAttrs(6) },
   ],
   toDOM(node) {
-    return [`h${node.attrs.level}`, setNumberedAttrs(node.attrs), 0];
+    return [
+      `h${node.attrs.level}`,
+      { ...setNumberedAttrs(node.attrs), id: node.attrs.id ?? createId() },
+      0,
+    ];
   },
   attrsFromMyst: (token) => ({
     id: null,

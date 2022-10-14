@@ -48,6 +48,7 @@ export enum CommandNames {
   'link_table' = 'link_table',
   'image' = 'image',
   'mermaid' = 'mermaid',
+  'toc' = 'toc',
 
   // Table
   'insert_table' = 'insert_table',
@@ -456,5 +457,11 @@ export const ALL_COMMANDS: CommandResult[] = [
     title: 'Mermaid',
     description: 'Add mermaid flowchart',
     available: nodeInSchema(nodeNames.mermaid),
+  },
+  {
+    name: CommandNames.toc,
+    title: 'table of content',
+    description: 'table of content',
+    available: nodeInSchema(nodeNames.toc),
   },
 ];

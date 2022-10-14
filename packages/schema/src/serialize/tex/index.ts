@@ -103,6 +103,7 @@ export const texSerializer = new MarkdownSerializer(
     equation: nodes.Equation.toTex,
     table: nodes.Table.toTex,
     mermaid: nodes.Mermaid.toTex,
+    toc: nodes.TOC.toTex,
     // \usepackage{framed}
     callout: nodes.Callout.toTex,
     aside: nodes.Aside.toTex,

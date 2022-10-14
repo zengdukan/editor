@@ -199,6 +199,10 @@ export function executeCommand(
         removeText();
         dispatch(actions.wrapInHeading(schema, Number.parseInt(command.slice(7), 10)));
         return true;
+      case CommandNames.toc:
+        removeText();
+        dispatch(replaceOrInsert(schema.nodes.toc));
+        return true;
       case CommandNames.quote:
         removeText();
         dispatch(actions.wrapIn(schema.nodes.blockquote));

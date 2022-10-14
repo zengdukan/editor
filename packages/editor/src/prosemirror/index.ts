@@ -64,6 +64,7 @@ export function createEditorView(
         variable: views.newWidgetView,
         task_item: views.TaskItemView,
         mermaid: views.MermaidView,
+        toc: views.TocView,
         ...opts.nodeViews,
       },
       // This can be set in the middleware `tr.setMeta(editable, false)`
