@@ -64,6 +64,7 @@ export const nodes = {
   horizontal_rule: basic.horizontal_rule,
   hard_break: basic.hard_break,
   time: Nodes.Time.default,
+  toc: Nodes.TOC.default,
   ...listNodes,
   ...tableNodes,
   // Presentational components

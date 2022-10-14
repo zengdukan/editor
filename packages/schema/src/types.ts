@@ -33,6 +33,7 @@ export enum nodeNames {
   math = 'math',
   equation = 'equation',
   mermaid = 'mermaid',
+  toc = 'toc',
   footnote = 'footnote',
   variable = 'variable',
   display = 'display',

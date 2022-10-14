@@ -57,6 +57,7 @@ const mdNodes: MarkdownSerializerParameters[0] = {
   },
   task_item: nodes.TaskItem.toMarkdown,
   task_list: nodes.TaskList.toMarkdown,
+  toc: nodes.TOC.toMarkdown,
   // Presentational
   image: nodes.Image.toMarkdown,
   figure: nodes.Figure.toMarkdown,

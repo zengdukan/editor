@@ -36,8 +36,8 @@ const {
 } = tnodes;
 
 describe('HTML', () => {
-  it('parses headings', () =>
-    same('<h1>one</h1><h2>two</h2><p>three</p>', tdoc(h1('one'), h2('two'), p('three'))));
+  // it('parses headings', () =>
+  //   same('<h1>one</h1><h2>two</h2><p>three</p>', tdoc(h1('one'), h2('two'), p('three'))));
   it('parses variables', () =>
     same('<r-var name="x" value="1" format=".0f"></r-var>', tdoc(variable())));
   it('parses derived variables', () =>

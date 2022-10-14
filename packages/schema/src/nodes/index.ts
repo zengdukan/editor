@@ -12,6 +12,7 @@ export * as Mention from './mention';
 export * as LinkBlock from './linkBlock';
 export * as TaskItem from './taskitem';
 export * as TaskList from './tasklist';
+export * as TOC from './toc';
 
 // Figures and Captions
 export * as Figure from './figure';

@@ -193,4 +193,8 @@ export type TaskList = {
   children?: TaskItem[];
 };
 
+export type TOC = {
+  type: 'toc';
+};
+
 export type Mermaid = Code & OptionalNumbered;
