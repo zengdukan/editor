@@ -28,6 +28,7 @@ export function useInlineActionProps() {
   };
 }
 
+// TODO: 增加mermaid弹窗菜单
 function InlineActionSwitch() {
   const { stateId, viewId, kind } = useInlineActionProps();
   return (
