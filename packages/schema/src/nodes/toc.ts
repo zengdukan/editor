@@ -6,8 +6,6 @@ import type { NoAttrs, TOC } from '../spec';
 const name = 'toc';
 const toc: MyNodeSpec<NoAttrs, TOC> = {
   group: NodeGroups.top,
-  draggable: false,
-  selectable: false,
   atom: true,
   marks: '',
   attrs: {},
