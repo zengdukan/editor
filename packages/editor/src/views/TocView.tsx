@@ -26,4 +26,5 @@ function TocNodeView({ view }: NodeViewProps) {
 export const TocView = createNodeView(TocNodeView, {
   wrapper: 'div',
   className: 'toc',
+  enableSelectionHighlight: true,
 });
