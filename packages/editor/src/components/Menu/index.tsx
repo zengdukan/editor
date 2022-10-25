@@ -145,6 +145,10 @@ function EditorMenu(props: Props) {
     [stateId, viewId],
   );
   const toggleBrackets = useCallback(() => dispatch(toggleCitationBrackets()), []);
+  const setTextAlign = useCallback(
+    (align: 'left' | 'right' | 'center') => dispatch(actions.setAlignment(stateId, viewId, align)),
+    [stateId, viewId],
+  );
 
   const clickBold = useCallback(() => toggleMark(schema?.marks.strong), [toggleMark]);
   const clickItalic = useCallback(() => toggleMark(schema?.marks.em), [toggleMark]);
@@ -171,6 +175,9 @@ function EditorMenu(props: Props) {
   const clickIframe = useCallback(() => command(CommandNames.iframe), [command]);
   const clickTaskList = useCallback(() => command(CommandNames.task_list), [command]);
   const clickMermaid = useCallback(() => command(CommandNames.mermaid), [command]);
+  const clickAlignLeft = useCallback(() => setTextAlign('left'), [setTextAlign]);
+  const clickAlignRight = useCallback(() => setTextAlign('right'), [setTextAlign]);
+  const clickAlignCenter = useCallback(() => setTextAlign('center'), [setTextAlign]);
 
   return (
     <Grid
@@ -192,6 +199,9 @@ function EditorMenu(props: Props) {
       <MenuIcon kind="code" active={active.code} disabled={off} onClick={clickCode} />
       <MenuIcon kind="subscript" active={active.sub} disabled={off} onClick={clickSub} />
       <MenuIcon kind="superscript" active={active.sup} disabled={off} onClick={clickSuper} />
+      <MenuIcon kind="left" active={true} disabled={off} onClick={clickAlignLeft} />
+      <MenuIcon kind="center" active={true} disabled={off} onClick={clickAlignCenter} />
+      <MenuIcon kind="right" active={true} disabled={off} onClick={clickAlignRight} />
 
       {parents.table && (
         <>

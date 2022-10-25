@@ -331,3 +331,33 @@ export function toggleCitationBrackets(): AppThunk<boolean> {
     return true;
   };
 }
+
+export function setAlignment(
+  stateKey: any,
+  viewId: string | null,
+  align: 'left' | 'right' | 'center',
+): AppThunk<boolean> {
+  return (dispatch, getState) => {
+    const editorState = getEditorState(getState(), stateKey)?.state;
+    if (editorState == null) return false;
+
+    const nodeType = ['paragraph'];
+    const tr = editorState.tr;
+    const attributes = { textAlign: align };
+    tr.selection.ranges.forEach((range) => {
+      const from = range.$from.pos;
+      const to = range.$to.pos;
+
+      editorState.doc.nodesBetween(from, to, (node, pos) => {
+        if (nodeType.includes(node.type.name)) {
+          tr.setNodeMarkup(pos, undefined, {
+            ...node.attrs,
+            ...attributes,
+          });
+        }
+      });
+    });
+    const result = dispatch(applyProsemirrorTransaction(stateKey, viewId, tr, false));
+    return result;
+  };
+}

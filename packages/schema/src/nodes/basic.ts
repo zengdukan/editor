@@ -30,15 +30,21 @@ export const docComment: NodeSpec = {
   content: `(${NodeGroups.block} | ${NodeGroups.heading} | ${nodeNames.equation})+`, // browsers will completely collapse the node when it's empty `+` is necessary
 };
 
-export const paragraph: MyNodeSpec<NoAttrs, Paragraph> = {
-  attrs: {},
+export type ParagraphAttrs = {
+  textAlign: 'left' | 'center' | 'right';
+};
+export const paragraph: MyNodeSpec<ParagraphAttrs, Paragraph> = {
+  attrs: {
+    textAlign: { default: 'left' },
+  },
   content: `${NodeGroups.inline}*`,
   group: NodeGroups.block,
-  parseDOM: [{ tag: 'p' }],
-  toDOM() {
-    return ['p', 0];
+  parseDOM: [{ tag: 'p', getAttrs: (node: any) => node.style.textAlign || 'left' }],
+  toDOM(node) {
+    if (node.attrs.textAlign === 'left') return ['p', 0];
+    return ['p', { style: `text-align: ${node.attrs.textAlign}` }, 0];
   },
-  attrsFromMyst: () => ({}),
+  attrsFromMyst: () => ({ textAlign: 'left' }),
   toMyst: (props) => ({
     type: 'paragraph',
     children: (props.children || []) as PhrasingContent[],
