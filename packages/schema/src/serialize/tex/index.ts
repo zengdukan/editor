@@ -148,6 +148,7 @@ export const texSerializer = new MarkdownSerializer(
     superscript: createMarkOpenClose('textsuperscript'),
     // \usepackage[normalem]{ulem}
     strikethrough: createMarkOpenClose('sout'),
+    highlight: createMarkOpenClose(),
   },
 );
 
