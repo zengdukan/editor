@@ -13,6 +13,7 @@ import type {
   Superscript,
   Underline,
   Strikethrough,
+  Highlight,
 } from './spec';
 import type { Props } from './nodes/types';
 import { MarkGroups } from './nodes/types';
@@ -198,6 +199,37 @@ export const abbr: MyMarkSpec<Abbreviation> = {
   toMyst: (props) => ({
     type: 'abbreviation',
     title: props.title || undefined,
+    children: (props.children || []) as StaticPhrasingContent[],
+  }),
+};
+
+export const highlight: MyMarkSpec<Highlight> = {
+  attrs: {
+    color: { default: undefined },
+  },
+  parseDOM: [
+    {
+      tag: 'mark',
+      getAttrs(node: any) {
+        return { color: node.getAttribute('data-color') };
+      },
+    },
+  ],
+  toDOM(node) {
+    const { color } = node.attrs;
+    if (color == null) {
+      return ['mark', 0];
+    }
+
+    return [
+      'mark',
+      { 'data-color': color, style: `background-color: ${color}; color: inherit` },
+      0,
+    ];
+  },
+  attrsFromMyst: () => ({}),
+  toMyst: (props) => ({
+    type: 'highlight',
     children: (props.children || []) as StaticPhrasingContent[],
   }),
 };

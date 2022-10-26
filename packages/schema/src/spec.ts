@@ -197,4 +197,9 @@ export type TOC = {
   type: 'toc';
 };
 
+export type Highlight = {
+  type: 'highlight';
+  color?: string;
+};
+
 export type Mermaid = Code & OptionalNumbered;

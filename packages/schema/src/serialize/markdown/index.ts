@@ -128,6 +128,12 @@ const mdMarks: MarkdownSerializerParameters[1] = {
   superscript: wrapMark('sup'),
   strikethrough: wrapMark('strike'),
   underline: wrapMark('u'),
+  highlight: {
+    open: '==',
+    close: '==',
+    mixable: true,
+    expelEnclosingWhitespace: true,
+  },
 };
 
 export function toMyst(doc: ProsemirrorNode, opts?: MarkdownOptions) {

@@ -84,6 +84,7 @@ export const marks = {
   strikethrough: basicMarks.strikethrough,
   underline: basicMarks.underline,
   abbr: basicMarks.abbr,
+  highlight: basicMarks.highlight,
 };
 
 export const presets = {

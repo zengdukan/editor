@@ -181,6 +181,10 @@ const handlers: Record<string, TokenHandler> = {
     name: markNames.superscript,
     children: token.children,
   }),
+  highlight: (token) => ({
+    name: markNames.highlight,
+    children: token.children,
+  }),
   paragraph: (token) => ({
     name: nodeNames.paragraph,
     children: token.children,

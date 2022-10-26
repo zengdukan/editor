@@ -58,4 +58,5 @@ export enum markNames {
   strikethrough = 'strikethrough',
   underline = 'underline',
   abbr = 'abbr',
+  highlight = 'highlight',
 }

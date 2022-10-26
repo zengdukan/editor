@@ -113,6 +113,7 @@ function EditorMenu(props: Props) {
       underline: schema?.marks.underline,
       linked: schema?.marks.link,
       code: schema?.marks.code,
+      highlight: schema?.marks.highlight,
     }),
   );
 
@@ -139,6 +140,11 @@ function EditorMenu(props: Props) {
     (mark?: MarkType) => dispatch(actions.toggleMark(stateId, viewId, mark)),
     [stateId, viewId],
   );
+  const toggleMarkWithAttr = useCallback(
+    (mark?: MarkType, attrs?: { [key: string]: any }) =>
+      dispatch(actions.toggleMark(stateId, viewId, mark, attrs)),
+    [stateId, viewId],
+  );
   const wrapInline = (node?: NodeType) => dispatch(actions.insertInlineNode(node));
   const command = useCallback(
     (name: CommandNames) => dispatch(actions.executeCommand(name, viewId)),
@@ -153,6 +159,11 @@ function EditorMenu(props: Props) {
   const clickCode = useCallback(() => toggleMark(schema?.marks.code), [toggleMark]);
   const clickSub = useCallback(() => toggleMark(schema?.marks.subscript), [toggleMark]);
   const clickSuper = useCallback(() => toggleMark(schema?.marks.superscript), [toggleMark]);
+  const clickHighlightAttr = useCallback(
+    (attrs?: { [key: string]: any }) => toggleMarkWithAttr(schema?.marks.highlight, attrs),
+    [toggleMarkWithAttr],
+  );
+  const clickHighlight = useCallback(() => toggleMark(schema?.marks.highlight), [toggleMark]);
   const clickFootnote = useCallback(() => command(CommandNames.footnote), [command]);
   const clickUl = useCallback(() => command(CommandNames.bullet_list), [command]);
   const clickGrid = useCallback(() => command(CommandNames.insert_table), [command]);
@@ -192,6 +203,13 @@ function EditorMenu(props: Props) {
       <MenuIcon kind="code" active={active.code} disabled={off} onClick={clickCode} />
       <MenuIcon kind="subscript" active={active.sub} disabled={off} onClick={clickSub} />
       <MenuIcon kind="superscript" active={active.sup} disabled={off} onClick={clickSuper} />
+      <MenuIcon kind="code" active={active.highlight} disabled={off} onClick={clickHighlight} />
+      <MenuIcon
+        kind="code"
+        active={active.highlight}
+        disabled={off}
+        onClick={() => clickHighlightAttr({ color: '#8ce99a' })}
+      />
 
       {parents.table && (
         <>

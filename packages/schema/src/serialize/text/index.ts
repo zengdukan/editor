@@ -93,6 +93,7 @@ export const textSerializer = new MarkdownSerializer(
     superscript: noMarks,
     strikethrough: noMarks,
     underline: noMarks,
+    highlight: noMarks,
   },
 );
 
