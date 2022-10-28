@@ -15,6 +15,15 @@ import { replaceSelectedNode, selectParentNodeOfType } from '@curvenote/prosemir
 import type { ContentNodeWithPos } from '@curvenote/prosemirror-utils';
 import { liftTarget } from 'prosemirror-transform';
 import { dispatchCommentAction } from '../../prosemirror/plugins/comments';
+import {
+  find as findAction,
+  findNext as findNextAction,
+  findPrevious as findPreviousAction,
+  replace as replaceAction,
+  replaceAll as replaceAllAction,
+  FindProps,
+  getFindProps,
+} from '../../prosemirror/plugins/search';
 import type { AppThunk } from '../types';
 import {
   getEditorState,
@@ -329,5 +338,87 @@ export function toggleCitationBrackets(): AppThunk<boolean> {
     const tr = editor.state.tr.replaceSelectionWith(wrapped).scrollIntoView();
     dispatch(applyProsemirrorTransaction(editor.key, editor.viewId, tr));
     return true;
+  };
+}
+
+export function selectedSearchResult(viewId: string): AppThunk<void> {
+  return (dispatch, getState) => {
+    const { view } = getEditorView(getState(), viewId);
+    if (!view) return;
+    const props = getFindProps(view.state);
+    if (!props) return;
+    const { matches, activeIndex } = props;
+    if (matches.length === 0 || activeIndex > matches.length || activeIndex < 0) return;
+    const tr = view.state.tr;
+    const sel = TextSelection.create(tr.doc, matches[activeIndex].from);
+    tr.setSelection(sel).scrollIntoView();
+    return dispatch(applyProsemirrorTransaction('myEditor', viewId, tr));
+  };
+}
+
+export function find(viewId: string, keyword: string): AppThunk<boolean> {
+  return (dispatch, getState) => {
+    const { view } = getEditorView(getState(), viewId);
+    if (!view) return false;
+    const action = findAction({
+      findTerm: keyword,
+      caseSensitive: false,
+      disableRegex: true,
+    });
+    const result = action(view.state, (tr: Transaction) =>
+      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+    );
+    if (result) dispatch(selectedSearchResult(viewId));
+    return result;
+  };
+}
+
+export function findNext(viewId: string): AppThunk<boolean> {
+  return (dispatch, getState) => {
+    const { view } = getEditorView(getState(), viewId);
+    if (!view) return false;
+    const action = findNextAction();
+    const result = action(view.state, (tr: Transaction) =>
+      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+    );
+    if (result) dispatch(selectedSearchResult(viewId));
+    return true;
+  };
+}
+
+export function findPrev(viewId: string): AppThunk<boolean> {
+  return (dispatch, getState) => {
+    const { view } = getEditorView(getState(), viewId);
+    if (!view) return false;
+    const action = findPreviousAction();
+    const result = action(view.state, (tr: Transaction) =>
+      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+    );
+    if (result) dispatch(selectedSearchResult(viewId));
+    return true;
+  };
+}
+
+export function replace(viewId: string, replaceText: string, findText: string): AppThunk<boolean> {
+  return (dispatch, getState) => {
+    const { view } = getEditorView(getState(), viewId);
+    if (!view) return false;
+    const action = replaceAction(view, replaceText, findText);
+    const result = action(view.state, (tr: Transaction) =>
+      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+    );
+    return result;
+  };
+}
+
+export function replaceAll(viewId: string, replaceText: string): AppThunk<boolean> {
+  return (dispatch, getState) => {
+    const { view } = getEditorView(getState(), viewId);
+    if (!view) return false;
+    const action = replaceAllAction(view, replaceText);
+    const result = action(view.state, (tr: Transaction) =>
+      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+    );
+    return result;
   };
 }

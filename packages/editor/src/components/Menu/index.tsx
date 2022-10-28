@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Menu, Theme } from '@material-ui/core';
+import { Button, Menu, TextField, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { MarkType, NodeType } from 'prosemirror-model';
@@ -183,159 +183,216 @@ function EditorMenu(props: Props) {
   const clickTaskList = useCallback(() => command(CommandNames.task_list), [command]);
   const clickMermaid = useCallback(() => command(CommandNames.mermaid), [command]);
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFindText(event.target.value);
+    dispatch(actions.find('view1', event.target.value));
+  };
+  const handleSearchNext = () => {
+    dispatch(actions.findNext('view1'));
+  };
+  const handleSearchPrev = () => {
+    dispatch(actions.findPrev('view1'));
+  };
+
+  const [findText, setFindText] = useState('');
+  const [replaceText, setReplaceText] = useState('');
+  const handleReplaceTextChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setReplaceText(event.target.value);
+  };
+
+  const handleReplace = () => {
+    dispatch(actions.replace('view1', replaceText, findText));
+  };
+  const handleReplaceAll = () => {
+    dispatch(actions.replaceAll('view1', replaceText));
+  };
+
   return (
-    <Grid
-      container
-      alignItems="center"
-      className={`${classes.root} ${standAlone ? classes.center : classes.pad}`}
-      wrap="nowrap"
-    >
-      {!standAlone && <MenuIcon kind="divider" />}
-      <MenuIcon kind="bold" active={active.strong} disabled={off} onClick={clickBold} />
-      <MenuIcon kind="italic" active={active.em} disabled={off} onClick={clickItalic} />
-      <MenuIcon
-        kind="underline"
-        active={active.underline}
-        disabled={off}
-        onClick={clickUnderline}
-      />
-      <MenuIcon kind="strikethrough" active={active.strike} disabled={off} onClick={clickStrike} />
-      <MenuIcon kind="code" active={active.code} disabled={off} onClick={clickCode} />
-      <MenuIcon kind="subscript" active={active.sub} disabled={off} onClick={clickSub} />
-      <MenuIcon kind="superscript" active={active.sup} disabled={off} onClick={clickSuper} />
-      <MenuIcon kind="code" active={active.highlight} disabled={off} onClick={clickHighlight} />
-      <MenuIcon
-        kind="code"
-        active={active.highlight}
-        disabled={off}
-        onClick={() => clickHighlightAttr({ color: '#8ce99a' })}
-      />
-
-      {parents.table && (
-        <>
-          <MenuIcon kind="divider" />
-          <MenuIcon
-            kind="table"
-            active={parents.ul}
-            disabled={off}
-            onClick={(e) => {
-              setIsTableMenuOpen(true);
-              setTableAnchor(e.currentTarget);
-            }}
-          />
-        </>
-      )}
-      <TableMenu
-        anchor={tableAnchor}
-        onClose={() => {
-          setIsTableMenuOpen(false);
-        }}
-        isOpen={isTableMenuOpen}
-        command={command}
-      />
-      <MenuIcon kind="divider" />
-
-      <MenuIcon
-        kind="ul"
-        active={parents.ul}
-        disabled={off || !schema?.nodes.bullet_list}
-        onClick={clickUl}
-      />
-      <MenuIcon
-        kind="ol"
-        active={parents.ol}
-        disabled={off || !schema?.nodes.ordered_list}
-        onClick={clickOl}
-      />
-      <MenuIcon kind="divider" />
-      <MenuIcon kind="link" active={active.linked} disabled={off} onClick={clickLink} />
-      {nodes.cite && (
+    <>
+      <Grid
+        container
+        alignItems="center"
+        className={`${classes.root} ${standAlone ? classes.center : classes.pad}`}
+        wrap="nowrap"
+      >
+        <TextField label="search" id="search" onChange={handleChange} />
+        <Button variant="text" onClick={handleSearchPrev}>
+          &lt;
+        </Button>
+        <Button variant="text" onClick={handleSearchNext}>
+          &gt;
+        </Button>
+        <TextField label="replace" id="replace" onChange={handleReplaceTextChanged} />
+        <Button variant="outlined" onClick={handleReplace}>
+          replace
+        </Button>
+        <Button variant="outlined" onClick={handleReplaceAll}>
+          replace all
+        </Button>
+      </Grid>
+      <Grid
+        container
+        alignItems="center"
+        className={`${classes.root} ${standAlone ? classes.center : classes.pad}`}
+        wrap="nowrap"
+      >
+        {!standAlone && <MenuIcon kind="divider" />}
+        <MenuIcon kind="bold" active={active.strong} disabled={off} onClick={clickBold} />
+        <MenuIcon kind="italic" active={active.em} disabled={off} onClick={clickItalic} />
         <MenuIcon
-          kind="brackets"
-          active={parents.cite_group}
+          kind="underline"
+          active={active.underline}
           disabled={off}
-          onClick={toggleBrackets}
+          onClick={clickUnderline}
         />
-      )}
-      <MenuIcon kind="divider" />
-      <MenuIcon kind="more" disabled={off} onClick={onOpen} aria-controls="insert-menu" />
-      {Boolean(anchorEl) && (
-        <Menu
-          id="insert-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={onClose}
-        >
-          <div onClick={() => onClose()}>
-            {schema?.nodes.math && (
-              <MenuAction kind="math" disabled={off} action={clickMath} title="Inline Math" />
-            )}
-            {schema?.nodes.equation && (
-              <MenuAction
-                kind="math"
-                disabled={off}
-                action={clickEquation}
-                title="Equation Block"
-              />
-            )}
+        <MenuIcon
+          kind="strikethrough"
+          active={active.strike}
+          disabled={off}
+          onClick={clickStrike}
+        />
+        <MenuIcon kind="code" active={active.code} disabled={off} onClick={clickCode} />
+        <MenuIcon kind="subscript" active={active.sub} disabled={off} onClick={clickSub} />
+        <MenuIcon kind="superscript" active={active.sup} disabled={off} onClick={clickSuper} />
+        <MenuIcon kind="code" active={active.highlight} disabled={off} onClick={clickHighlight} />
+        <MenuIcon
+          kind="code"
+          active={active.highlight}
+          disabled={off}
+          onClick={() => clickHighlightAttr({ color: '#8ce99a' })}
+        />
 
-            {schema?.nodes.image && (
-              <MenuAction kind="image" disabled={off} action={clickImage} title="Image" />
-            )}
+        {parents.table && (
+          <>
+            <MenuIcon kind="divider" />
+            <MenuIcon
+              kind="table"
+              active={parents.ul}
+              disabled={off}
+              onClick={(e) => {
+                setIsTableMenuOpen(true);
+                setTableAnchor(e.currentTarget);
+              }}
+            />
+          </>
+        )}
+        <TableMenu
+          anchor={tableAnchor}
+          onClose={() => {
+            setIsTableMenuOpen(false);
+          }}
+          isOpen={isTableMenuOpen}
+          command={command}
+        />
+        <MenuIcon kind="divider" />
 
-            {schema?.nodes.footnote && (
-              <MenuAction title="Footnote" kind="footnote" disabled={off} action={clickFootnote} />
-            )}
+        <MenuIcon
+          kind="ul"
+          active={parents.ul}
+          disabled={off || !schema?.nodes.bullet_list}
+          onClick={clickUl}
+        />
+        <MenuIcon
+          kind="ol"
+          active={parents.ol}
+          disabled={off || !schema?.nodes.ordered_list}
+          onClick={clickOl}
+        />
+        <MenuIcon kind="divider" />
+        <MenuIcon kind="link" active={active.linked} disabled={off} onClick={clickLink} />
+        {nodes.cite && (
+          <MenuIcon
+            kind="brackets"
+            active={parents.cite_group}
+            disabled={off}
+            onClick={toggleBrackets}
+          />
+        )}
+        <MenuIcon kind="divider" />
+        <MenuIcon kind="more" disabled={off} onClick={onOpen} aria-controls="insert-menu" />
+        {Boolean(anchorEl) && (
+          <Menu
+            id="insert-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={onClose}
+          >
+            <div onClick={() => onClose()}>
+              {schema?.nodes.math && (
+                <MenuAction kind="math" disabled={off} action={clickMath} title="Inline Math" />
+              )}
+              {schema?.nodes.equation && (
+                <MenuAction
+                  kind="math"
+                  disabled={off}
+                  action={clickEquation}
+                  title="Equation Block"
+                />
+              )}
 
-            {schema?.nodes.table && (
-              <MenuAction title="Table" kind="table" disabled={off} action={clickGrid} />
-            )}
+              {schema?.nodes.image && (
+                <MenuAction kind="image" disabled={off} action={clickImage} title="Image" />
+              )}
 
-            {schema?.nodes.cite && (
-              <MenuAction kind="link" disabled={off} action={clickCite} title="Citation" />
-            )}
-            {schema?.nodes.horizontal_rule && (
-              <MenuAction kind="hr" disabled={off} action={clickHr} title="Divider" />
-            )}
-            {schema?.nodes.code_block && (
-              <MenuAction kind="code" disabled={off} action={clickCodeBlk} title="Code" />
-            )}
-            {schema?.nodes.iframe && (
-              <MenuAction
-                kind="youtube"
-                disabled={off}
-                action={clickYoutube}
-                title="YouTube Video"
-              />
-            )}
-            {schema?.nodes.iframe && (
-              <MenuAction kind="video" disabled={off} action={clickVimeo} title="Vimeo Video" />
-            )}
-            {schema?.nodes.iframe && (
-              <MenuAction kind="video" disabled={off} action={clickLoom} title="Loom Video" />
-            )}
-            {schema?.nodes.iframe && (
-              <MenuAction kind="iframe" disabled={off} action={clickMiro} title="Miro Board" />
-            )}
-            {schema?.nodes.iframe && (
-              <MenuAction
-                kind="iframe"
-                disabled={off}
-                action={clickIframe}
-                title="Embed an IFrame"
-              />
-            )}
-            {schema?.nodes.task_item && (
-              <MenuAction kind="iframe" disabled={off} action={clickTaskList} title="TaskItem" />
-            )}
-            {schema?.nodes.mermaid && (
-              <MenuAction kind="iframe" disabled={off} action={clickMermaid} title="Mermaid" />
-            )}
-          </div>
-        </Menu>
-      )}
-    </Grid>
+              {schema?.nodes.footnote && (
+                <MenuAction
+                  title="Footnote"
+                  kind="footnote"
+                  disabled={off}
+                  action={clickFootnote}
+                />
+              )}
+
+              {schema?.nodes.table && (
+                <MenuAction title="Table" kind="table" disabled={off} action={clickGrid} />
+              )}
+
+              {schema?.nodes.cite && (
+                <MenuAction kind="link" disabled={off} action={clickCite} title="Citation" />
+              )}
+              {schema?.nodes.horizontal_rule && (
+                <MenuAction kind="hr" disabled={off} action={clickHr} title="Divider" />
+              )}
+              {schema?.nodes.code_block && (
+                <MenuAction kind="code" disabled={off} action={clickCodeBlk} title="Code" />
+              )}
+              {schema?.nodes.iframe && (
+                <MenuAction
+                  kind="youtube"
+                  disabled={off}
+                  action={clickYoutube}
+                  title="YouTube Video"
+                />
+              )}
+              {schema?.nodes.iframe && (
+                <MenuAction kind="video" disabled={off} action={clickVimeo} title="Vimeo Video" />
+              )}
+              {schema?.nodes.iframe && (
+                <MenuAction kind="video" disabled={off} action={clickLoom} title="Loom Video" />
+              )}
+              {schema?.nodes.iframe && (
+                <MenuAction kind="iframe" disabled={off} action={clickMiro} title="Miro Board" />
+              )}
+              {schema?.nodes.iframe && (
+                <MenuAction
+                  kind="iframe"
+                  disabled={off}
+                  action={clickIframe}
+                  title="Embed an IFrame"
+                />
+              )}
+              {schema?.nodes.task_item && (
+                <MenuAction kind="iframe" disabled={off} action={clickTaskList} title="TaskItem" />
+              )}
+              {schema?.nodes.mermaid && (
+                <MenuAction kind="iframe" disabled={off} action={clickMermaid} title="Mermaid" />
+              )}
+            </div>
+          </Menu>
+        )}
+      </Grid>
+    </>
   );
 }
 
