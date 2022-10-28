@@ -20,6 +20,7 @@ import { handleSuggestion } from '../../store/suggestion/actions';
 import commentsPlugin from './comments';
 import { getImagePlaceholderPlugin } from './ImagePlaceholder';
 import getPromptPlugin from './prompts';
+import getFindPlugin from './search';
 
 function tablesPlugins(schema: Schema) {
   // Don't add plugins if they are not in the schema
@@ -96,6 +97,7 @@ export function getPlugins(
     ];
   }
   return [
+    getFindPlugin(),
     editablePlugin(startEditable),
     getPromptPlugin(),
     ...autocomplete({
