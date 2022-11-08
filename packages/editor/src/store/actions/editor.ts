@@ -36,6 +36,7 @@ import {
 import { focusEditorView, focusSelectedEditorView } from '../ui/actions';
 import { applyProsemirrorTransaction } from '../state/actions';
 import { getNodeIfSelected } from '../ui/utils';
+import type { EditorView } from 'prosemirror-view';
 
 export function updateNodeAttrs(
   stateKey: any,
@@ -341,9 +342,12 @@ export function toggleCitationBrackets(): AppThunk<boolean> {
   };
 }
 
-export function selectedSearchResult(viewId: string): AppThunk<void> {
+export function selectedSearchResult(
+  viewId: string,
+  stateId: string,
+  view: EditorView,
+): AppThunk<void> {
   return (dispatch, getState) => {
-    const { view } = getEditorView(getState(), viewId);
     if (!view) return;
     const props = getFindProps(view.state);
     if (!props) return;
@@ -352,60 +356,60 @@ export function selectedSearchResult(viewId: string): AppThunk<void> {
     const tr = view.state.tr;
     const sel = TextSelection.create(tr.doc, matches[activeIndex].from);
     tr.setSelection(sel).scrollIntoView();
-    return dispatch(applyProsemirrorTransaction('myEditor', viewId, tr));
+    return dispatch(applyProsemirrorTransaction(stateId, viewId, tr));
   };
 }
 
 export function find(viewId: string, keyword: string): AppThunk<boolean> {
   return (dispatch, getState) => {
-    const { view } = getEditorView(getState(), viewId);
-    if (!view) return false;
+    const { view, stateId } = getEditorView(getState(), viewId);
+    if (!view || !stateId) return false;
     const action = findAction({
       findTerm: keyword,
       caseSensitive: false,
       disableRegex: true,
     });
     const result = action(view.state, (tr: Transaction) =>
-      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+      dispatch(applyProsemirrorTransaction(stateId, viewId, tr)),
     );
-    if (result) dispatch(selectedSearchResult(viewId));
+    if (result) dispatch(selectedSearchResult(viewId, stateId, view));
     return result;
   };
 }
 
 export function findNext(viewId: string): AppThunk<boolean> {
   return (dispatch, getState) => {
-    const { view } = getEditorView(getState(), viewId);
-    if (!view) return false;
+    const { view, stateId } = getEditorView(getState(), viewId);
+    if (!view || !stateId) return false;
     const action = findNextAction();
     const result = action(view.state, (tr: Transaction) =>
-      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+      dispatch(applyProsemirrorTransaction(stateId, viewId, tr)),
     );
-    if (result) dispatch(selectedSearchResult(viewId));
+    if (result) dispatch(selectedSearchResult(viewId, stateId, view));
     return true;
   };
 }
 
 export function findPrev(viewId: string): AppThunk<boolean> {
   return (dispatch, getState) => {
-    const { view } = getEditorView(getState(), viewId);
-    if (!view) return false;
+    const { view, stateId } = getEditorView(getState(), viewId);
+    if (!view || !stateId) return false;
     const action = findPreviousAction();
     const result = action(view.state, (tr: Transaction) =>
-      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+      dispatch(applyProsemirrorTransaction(stateId, viewId, tr)),
     );
-    if (result) dispatch(selectedSearchResult(viewId));
+    if (result) dispatch(selectedSearchResult(viewId, stateId, view));
     return true;
   };
 }
 
 export function replace(viewId: string, replaceText: string, findText: string): AppThunk<boolean> {
   return (dispatch, getState) => {
-    const { view } = getEditorView(getState(), viewId);
-    if (!view) return false;
+    const { view, stateId } = getEditorView(getState(), viewId);
+    if (!view || !stateId) return false;
     const action = replaceAction(view, replaceText, findText);
     const result = action(view.state, (tr: Transaction) =>
-      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+      dispatch(applyProsemirrorTransaction(stateId, viewId, tr)),
     );
     return result;
   };
@@ -413,11 +417,11 @@ export function replace(viewId: string, replaceText: string, findText: string): 
 
 export function replaceAll(viewId: string, replaceText: string): AppThunk<boolean> {
   return (dispatch, getState) => {
-    const { view } = getEditorView(getState(), viewId);
-    if (!view) return false;
+    const { view, stateId } = getEditorView(getState(), viewId);
+    if (!view || !stateId) return false;
     const action = replaceAllAction(view, replaceText);
     const result = action(view.state, (tr: Transaction) =>
-      dispatch(applyProsemirrorTransaction('myEditor', viewId, tr)),
+      dispatch(applyProsemirrorTransaction(stateId, viewId, tr)),
     );
     return result;
   };
