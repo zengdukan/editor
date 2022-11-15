@@ -183,6 +183,8 @@ function EditorMenu(props: Props) {
   const clickTaskList = useCallback(() => command(CommandNames.task_list), [command]);
   const clickMermaid = useCallback(() => command(CommandNames.mermaid), [command]);
 
+  // TODO: handleChange,handleSearchNext,handleSearchPrev,handleReplace,handleReplaceAll中的view1 替换为 viewId
+  // viewId 在editor focus后会设置, 未focus为null
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFindText(event.target.value);
     dispatch(actions.find('view1', event.target.value));
