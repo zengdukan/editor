@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/curvenote/editor/tree/main/packages/editor",
   "scripts": {
-    "clean": "rm -rf dist",
-    "compile": "npm run clean; tsc;",
-    "build": "npm run compile; npm run css; webpack --config webpack.prod.js",
+    "clean": "rimraf {dist}",
+    "compile": "npm run clean && tsc",
+    "build": "npm run compile && npm run css && webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
     "prepublishOnly": "npm run build",
     "css": "sass styles/index.scss dist/editor.css",
