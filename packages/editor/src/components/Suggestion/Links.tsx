@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import isEqual from 'lodash.isequal';
-import { State } from '../../store/types';
+import type { State } from '../../store/types';
 import { selectors } from '../../store';
 import Suggestion from './Suggestion';
-import { LinkResult } from '../../store/suggestion/types';
+import type { LinkResult } from '../../store/suggestion/types';
 
 function LinkSuggestions() {
   const results = useSelector(

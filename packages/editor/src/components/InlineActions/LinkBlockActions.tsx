@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { makeStyles, createStyles, Grid, Button, Tooltip } from '@material-ui/core';
+import { Grid, Button, Tooltip } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { NodeSelection } from 'prosemirror-state';
 import MenuIcon from '../Menu/Icon';
 import { applyProsemirrorTransaction, deleteNode, switchLinkType } from '../../store/actions';
-import { ActionProps } from './utils';
+import type { ActionProps } from './utils';
 import { getEditorState } from '../../store/state/selectors';
-import { Dispatch, State } from '../../store';
+import type { Dispatch, State } from '../../store';
 import TextAction from './TextAction';
 import { LinkTypeSelect } from './LinkTypeSelect';
 

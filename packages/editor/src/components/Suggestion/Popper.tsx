@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles, createStyles, Paper, Popper } from '@material-ui/core';
-
+import { Paper, Popper } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import { selectors } from '../../store';
 import useClickOutside from '../hooks/useClickOutside';
 import { usePopper } from '../InlineActions';

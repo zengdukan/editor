@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import isEqual from 'lodash.isequal';
-import { State } from '../../store/types';
+import type { State } from '../../store/types';
 import { SelectionKinds as Kinds } from '../../store/ui/types';
 import { getEditorUIStateAndViewIds, getInlineActionKind } from '../../store/ui/selectors';
 import LinkActions from './LinkActions';

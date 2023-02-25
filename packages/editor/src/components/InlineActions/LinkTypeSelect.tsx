@@ -1,6 +1,8 @@
 import React from 'react';
-import { makeStyles, createStyles, FormControl, Select, MenuItem } from '@material-ui/core';
-import { LinkType, LINK_TYPES } from '../types';
+import { FormControl, Select, MenuItem } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import type { LinkType } from '../types';
+import { LINK_TYPES } from '../types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,8 +26,9 @@ export function LinkTypeSelect({
 }) {
   const classes = useStyles();
   return (
-    <FormControl>
+    <FormControl variant="standard">
       <Select
+        variant="standard"
         disableUnderline
         onChange={(e) => {
           onChange(e.target.value as LinkType);

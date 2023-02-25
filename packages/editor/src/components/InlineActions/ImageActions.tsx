@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, createStyles, Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import { isNodeSelection } from '@curvenote/prosemirror-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuIcon from '../Menu/Icon';
@@ -10,8 +11,8 @@ import {
   createFigure,
 } from '../../store/actions';
 import SelectWidth from './SelectWidth';
-import { ActionProps } from './utils';
-import { Dispatch, State } from '../../store';
+import type { ActionProps } from './utils';
+import type { Dispatch, State } from '../../store';
 import { getEditorState } from '../../store/selectors';
 import { getNodeFromSelection } from '../../store/ui/utils';
 

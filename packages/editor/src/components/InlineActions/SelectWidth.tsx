@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popover, Slider } from '@material-ui/core';
+import { Popover, Slider } from '@mui/material';
 import { DEFAULT_IMAGE_WIDTH } from '@curvenote/schema';
 import MenuIcon from '../Menu/Icon';
 

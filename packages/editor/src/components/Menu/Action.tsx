@@ -1,15 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { createStyles, makeStyles, MenuItem, SvgIcon, Typography } from '@material-ui/core';
-import FunctionsIcon from '@material-ui/icons/Functions';
-import CodeIcon from '@material-ui/icons/Code';
-import RemoveIcon from '@material-ui/icons/Remove';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
-import WebAssetIcon from '@material-ui/icons/WebAsset';
-import LinkIcon from '@material-ui/icons/Link';
-import ImageIcon from '@material-ui/icons/Image';
-import GridIcon from '@material-ui/icons/GridOn';
+import { MenuItem, SvgIcon, Typography } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import FunctionsIcon from '@mui/icons-material/Functions';
+import CodeIcon from '@mui/icons-material/Code';
+import RemoveIcon from '@mui/icons-material/Remove';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import WebAssetIcon from '@mui/icons-material/WebAsset';
+import LinkIcon from '@mui/icons-material/Link';
+import ImageIcon from '@mui/icons-material/Image';
+import GridIcon from '@mui/icons-material/GridOn';
 
 // https://icon-sets.iconify.design/fluent/text-footnote-20-regular/
 function FootnoteIcon(props: any) {

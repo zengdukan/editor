@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react';
-import { makeStyles, createStyles, Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import { findChildrenByType, findParentNode } from '@curvenote/prosemirror-utils';
-import { Node } from 'prosemirror-model';
-import { CaptionKind, nodeNames, Nodes } from '@curvenote/schema';
+import type { Node } from 'prosemirror-model';
+import type { Nodes } from '@curvenote/schema';
+import { CaptionKind, nodeNames } from '@curvenote/schema';
 import { useDispatch, useSelector } from 'react-redux';
 import { NodeSelection, TextSelection } from 'prosemirror-state';
 import MenuIcon from '../Menu/Icon';
@@ -14,8 +16,10 @@ import {
   createFigure,
 } from '../../store/actions';
 import { getEditorState } from '../../store/state/selectors';
-import { actions, Dispatch, State } from '../../store';
-import { ActionProps, getFigure } from './utils';
+import type { Dispatch, State } from '../../store';
+import { actions } from '../../store';
+import type { ActionProps } from './utils';
+import { getFigure } from './utils';
 import { getNodeFromSelection } from '../../store/ui/utils';
 import { CommandNames } from '../../store/suggestion/commands';
 

@@ -1,7 +1,7 @@
-import { Node } from 'prosemirror-model';
-import { EditorView } from 'prosemirror-view';
+import type { Node } from 'prosemirror-model';
+import type { EditorView } from 'prosemirror-view';
 import { isEditable } from '../prosemirror/plugins/editable';
-import { GetPos } from './types';
+import type { GetPos } from './types';
 import { clickSelectFigure } from './utils';
 
 class ImageNodeView {

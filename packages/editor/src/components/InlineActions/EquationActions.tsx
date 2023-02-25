@@ -1,14 +1,15 @@
 import React from 'react';
-import { makeStyles, createStyles, Grid } from '@material-ui/core';
-import { Node } from 'prosemirror-model';
+import { Grid } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import type { Node } from 'prosemirror-model';
 import { nodeNames } from '@curvenote/schema';
 import { findParentNode } from '@curvenote/prosemirror-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuIcon from '../Menu/Icon';
 import { updateNodeAttrs } from '../../store/actions';
 import { getEditorState } from '../../store/selectors';
-import { Dispatch, State } from '../../store';
-import { ActionProps } from './utils';
+import type { Dispatch, State } from '../../store';
+import type { ActionProps } from './utils';
 import { getNodeFromSelection } from '../../store/ui/utils';
 
 const useStyles = makeStyles(() =>

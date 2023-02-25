@@ -1,8 +1,8 @@
-import { Node } from 'prosemirror-model';
-import { EditorView } from 'prosemirror-view';
+import type { Node } from 'prosemirror-model';
+import type { EditorView } from 'prosemirror-view';
 import { openAttributeEditor } from '../store/attrs/actions';
 import { store } from '../connect';
-import { GetPos } from './types';
+import type { GetPos } from './types';
 
 class WidgetView {
   // The node's representation in the editor (empty, for now)

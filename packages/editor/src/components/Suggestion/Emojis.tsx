@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { makeStyles, createStyles, Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import isEqual from 'lodash.isequal';
-import { State } from '../../store/types';
+import type { State } from '../../store/types';
 import { selectors } from '../../store';
 import Suggestion from './Suggestion';
-import { EmojiResult } from '../../store/suggestion/types';
+import type { EmojiResult } from '../../store/suggestion/types';
 
 const useStyles = makeStyles(() =>
   createStyles({

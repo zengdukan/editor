@@ -3,8 +3,8 @@
  */
 
 import CodeMirror from 'codemirror';
-import { EditorView, NodeView } from 'prosemirror-view';
-import { Node } from 'prosemirror-model';
+import type { EditorView, NodeView } from 'prosemirror-view';
+import type { Node } from 'prosemirror-model';
 import { undo, redo } from 'prosemirror-history';
 import 'codemirror/mode/python/python';
 import 'codemirror/mode/javascript/javascript';
@@ -21,10 +21,12 @@ import 'codemirror/mode/sql/sql';
 import 'codemirror/mode/ruby/ruby';
 import 'codemirror/mode/rust/rust';
 import 'codemirror/mode/go/go';
-import { EditorState, Selection, TextSelection, Transaction } from 'prosemirror-state';
+import type { EditorState, Transaction } from 'prosemirror-state';
+import { Selection, TextSelection } from 'prosemirror-state';
 import { findParentNode } from '@curvenote/prosemirror-utils';
 import { nodeNames } from '@curvenote/schema';
-import { GetPos, LanguageNames, SUPPORTED_LANGUAGES } from './types';
+import type { GetPos } from './types';
+import { LanguageNames, SUPPORTED_LANGUAGES } from './types';
 import { isEditable } from '../prosemirror/plugins/editable';
 import { focusEditorView, insertParagraphAndSelect } from '../store/actions';
 import { store } from '../connect';

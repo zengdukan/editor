@@ -27,8 +27,8 @@ export function usePopper(currentEl: Element | null | undefined) {
         return undefined;
       };
     return debounce(() => {
-      if (popper && popper.reference.isConnected) {
-        popper.update();
+      if (popper) {
+        popper.forceUpdate();
       }
     }, 0);
   }, [popper]); // batch all updatePopper call in a call stack to avoid unnecessary render

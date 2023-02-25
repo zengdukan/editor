@@ -1,17 +1,11 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import isEqual from 'lodash.isequal';
-import {
-  TextField,
-  makeStyles,
-  Theme,
-  createStyles,
-  Popover,
-  Paper,
-  Typography,
-} from '@material-ui/core';
+import type { Theme } from '@mui/material';
+import { TextField, Popover, Paper, Typography } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import { schemas } from '@curvenote/schema';
-import { State, Dispatch } from '../../store/types';
+import type { State, Dispatch } from '../../store/types';
 import { closeAttributeEditor, updateNodeAttrs } from '../../store/actions';
 import {
   getEditorUI,
@@ -93,6 +87,7 @@ function Attributes() {
             const value = attrs[key];
             return (
               <TextField
+                variant="standard"
                 label={key}
                 key={key}
                 value={value}

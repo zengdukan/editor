@@ -1,12 +1,13 @@
 import React, { useCallback, useState } from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Button, Menu, TextField, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, createStyles } from '@mui/styles';
+import type { Theme } from '@mui/material';
+import { Button, Menu, TextField } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
-import { MarkType, NodeType } from 'prosemirror-model';
+import type { MarkType, NodeType } from 'prosemirror-model';
 import { CommandNames } from '../../store/suggestion/commands';
 import { selectors, actions } from '../../store';
-import { Dispatch, State } from '../../store/types';
+import type { Dispatch, State } from '../../store/types';
 import MenuIcon from './Icon';
 import { isEditable } from '../../prosemirror/plugins/editable';
 import MenuAction from './Action';
@@ -217,14 +218,19 @@ function EditorMenu(props: Props) {
         className={`${classes.root} ${standAlone ? classes.center : classes.pad}`}
         wrap="nowrap"
       >
-        <TextField label="search" id="search" onChange={handleChange} />
+        <TextField variant="standard" label="search" id="search" onChange={handleChange} />
         <Button variant="text" onClick={handleSearchPrev}>
           &lt;
         </Button>
         <Button variant="text" onClick={handleSearchNext}>
           &gt;
         </Button>
-        <TextField label="replace" id="replace" onChange={handleReplaceTextChanged} />
+        <TextField
+          variant="standard"
+          label="replace"
+          id="replace"
+          onChange={handleReplaceTextChanged}
+        />
         <Button variant="outlined" onClick={handleReplace}>
           replace
         </Button>

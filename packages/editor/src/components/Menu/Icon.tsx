@@ -1,49 +1,41 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {
-  Button,
-  createStyles,
-  Divider,
-  IconButton,
-  makeStyles,
-  SvgIcon,
-  Theme,
-  Tooltip,
-} from '@material-ui/core';
-import FormatBoldIcon from '@material-ui/icons/FormatBold';
-import FormatItalicIcon from '@material-ui/icons/FormatItalic';
-import StrikethroughSIcon from '@material-ui/icons/StrikethroughS';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
-import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
-import LinkIcon from '@material-ui/icons/Link';
-import CodeIcon from '@material-ui/icons/Code';
-import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
-import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
-import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight';
-import PhotoSizeSelectLargeIcon from '@material-ui/icons/PhotoSizeSelectLarge';
-import DeleteIcon from '@material-ui/icons/Delete';
-import LinkOffIcon from '@material-ui/icons/LinkOff';
-import FunctionsIcon from '@material-ui/icons/Functions';
-import AddIcon from '@material-ui/icons/Add';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import NewReleasesIcon from '@material-ui/icons/NewReleases';
-import InfoIcon from '@material-ui/icons/Info';
-import WarningIcon from '@material-ui/icons/Warning';
-import ErrorIcon from '@material-ui/icons/Error';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
-import LooksOneIcon from '@material-ui/icons/LooksOne';
-import ShortTextIcon from '@material-ui/icons/ShortText';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import CancelIcon from '@material-ui/icons/Cancel';
-import GridIcon from '@material-ui/icons/GridOn';
-import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import LooksOneOutlinedIcon from '@material-ui/icons/LooksOneOutlined';
+import type { Theme } from '@mui/material';
+import { Button, Divider, IconButton, SvgIcon, Tooltip } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import StrikethroughSIcon from '@mui/icons-material/StrikethroughS';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import LinkIcon from '@mui/icons-material/Link';
+import CodeIcon from '@mui/icons-material/Code';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
+import PhotoSizeSelectLargeIcon from '@mui/icons-material/PhotoSizeSelectLarge';
+import DeleteIcon from '@mui/icons-material/Delete';
+import LinkOffIcon from '@mui/icons-material/LinkOff';
+import FunctionsIcon from '@mui/icons-material/Functions';
+import AddIcon from '@mui/icons-material/Add';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import NewReleasesIcon from '@mui/icons-material/NewReleases';
+import InfoIcon from '@mui/icons-material/Info';
+import WarningIcon from '@mui/icons-material/Warning';
+import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import SettingsOverscanIcon from '@mui/icons-material/SettingsOverscan';
+import LooksOneIcon from '@mui/icons-material/LooksOne';
+import ShortTextIcon from '@mui/icons-material/ShortText';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import CancelIcon from '@mui/icons-material/Cancel';
+import GridIcon from '@mui/icons-material/GridOn';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import LooksOneOutlinedIcon from '@mui/icons-material/LooksOneOutlined';
 import classNames from 'classnames';
-// import ImageIcon from '@material-ui/icons/Image';
-// import TuneIcon from '@material-ui/icons/Tune';
+// import ImageIcon from '@mui/icons-material/Image';
+// import TuneIcon from '@mui/icons-material/Tune';
 
 // https://iconify.design/icon-sets/mdi/format-superscript.html
 function SubscriptIcon(props: any) {

@@ -1,14 +1,15 @@
-import { Node } from 'prosemirror-model';
+import type { Node } from 'prosemirror-model';
 import { StepMap } from 'prosemirror-transform';
 import { keymap } from 'prosemirror-keymap';
 import { undo, redo } from 'prosemirror-history';
-import { Transaction, EditorState, TextSelection } from 'prosemirror-state';
+import type { Transaction } from 'prosemirror-state';
+import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { chainCommands, deleteSelection, newlineInCode } from 'prosemirror-commands';
 import { isEditable } from '../prosemirror/plugins/editable';
 import { getInlinePlugins } from '../prosemirror/plugins';
 import { MathView } from './MathView';
-import { GetPos } from './types';
+import type { GetPos } from './types';
 
 class FootnoteNodeView {
   // The node's representation in the editor (empty, for now)

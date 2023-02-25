@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { createStore as createReduxStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { Button, createTheme } from '@material-ui/core';
+import { Button } from '@mui/material';
+import type { Theme } from '@mui/material/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { toHTML, toMarkdown, toTex, ReferenceKind, process, toText } from '@curvenote/schema';
 import { Sidenote, AnchorBase } from 'sidenotes';
 import { Fragment } from 'prosemirror-model';
-import {
-  actions,
-  Editor,
-  EditorMenu,
-  Store,
-  setup,
-  Suggestions,
-  Attributes,
-  InlineActions,
-  LinkResult,
-} from '../src';
+import type { Store, LinkResult } from '../src';
+import { actions, Editor, EditorMenu, setup, Suggestions, Attributes, InlineActions } from '../src';
 import rootReducer from './reducers';
 import middleware from './middleware';
 import 'codemirror/lib/codemirror.css';
 import '../styles/index.scss';
 import 'sidenotes/dist/sidenotes.css';
-import { Options } from '../src/connect';
+import type { Options } from '../src/connect';
 import SuggestionSwitch from '../src/components/Suggestion/Switch';
 import InlineActionSwitch from '../src/components/InlineActions/Switch';
+import '@mui/styles';
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 declare global {
   interface Window {
@@ -56,6 +55,8 @@ export function createStore(): Store {
   return createReduxStore(rootReducer, applyMiddleware(...middleware));
 }
 
+const theme = createTheme();
+
 export function DemoEditor({ content, store = createStore() }: { content: string; store?: Store }) {
   const [reduxStore, setStore] = useState<Store | null>(null);
   const [{ newCommentFn, removeCommentFn }, setFn] = useState<any>({
@@ -65,7 +66,6 @@ export function DemoEditor({ content, store = createStore() }: { content: string
   useEffect(() => {
     // TODO: handle contents update
     if (reduxStore) return;
-    const theme = createTheme({});
     const newComment = () => {
       store?.dispatch(actions.addCommentToSelectedView('sidenote1'));
     };
@@ -167,39 +167,43 @@ export function DemoEditor({ content, store = createStore() }: { content: string
   return (
     <Provider store={reduxStore}>
       <React.StrictMode>
-        <EditorMenu standAlone />
-        <InlineActions>
-          <InlineActionSwitch />
-        </InlineActions>
-        <article id={docId} className="content centered">
-          <AnchorBase anchor="anchor">
-            <div className="selected">
-              <Editor stateKey={stateKey} viewId={viewId1} />
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <EditorMenu standAlone />
+            <InlineActions>
+              <InlineActionSwitch />
+            </InlineActions>
+            <article id={docId} className="content centered">
+              <AnchorBase anchor="anchor">
+                <div className="selected">
+                  <Editor stateKey={stateKey} viewId={viewId1} />
+                </div>
+              </AnchorBase>
+              {/* <Editor stateKey={stateKey} viewId="two" /> */}
+              <div className="sidenotes">
+                <Sidenote sidenote="sidenote1" base="anchor">
+                  <div style={{ width: 280, height: 100, backgroundColor: 'green' }} />
+                </Sidenote>
+                <Sidenote sidenote="sidenote2" base="anchor">
+                  <div style={{ width: 280, height: 100, backgroundColor: 'red' }} />
+                </Sidenote>
+              </div>
+            </article>
+            <div className="centered">
+              <p>
+                Select some text to create an inline comment (cmd-opt-m). See
+                <a href="https://curvenote.com"> curvenote.com </a>
+                for full demo.
+              </p>
+              <Button onClick={newCommentFn}>Comment</Button>
+              <Button onClick={removeCommentFn}>Remove</Button>
             </div>
-          </AnchorBase>
-          {/* <Editor stateKey={stateKey} viewId="two" /> */}
-          <div className="sidenotes">
-            <Sidenote sidenote="sidenote1" base="anchor">
-              <div style={{ width: 280, height: 100, backgroundColor: 'green' }} />
-            </Sidenote>
-            <Sidenote sidenote="sidenote2" base="anchor">
-              <div style={{ width: 280, height: 100, backgroundColor: 'red' }} />
-            </Sidenote>
-          </div>
-        </article>
-        <div className="centered">
-          <p>
-            Select some text to create an inline comment (cmd-opt-m). See
-            <a href="https://curvenote.com"> curvenote.com </a>
-            for full demo.
-          </p>
-          <Button onClick={newCommentFn}>Comment</Button>
-          <Button onClick={removeCommentFn}>Remove</Button>
-        </div>
-        <Suggestions>
-          <SuggestionSwitch />
-        </Suggestions>
-        <Attributes />
+            <Suggestions>
+              <SuggestionSwitch />
+            </Suggestions>
+            <Attributes />
+          </ThemeProvider>
+        </StyledEngineProvider>
       </React.StrictMode>
     </Provider>
   );

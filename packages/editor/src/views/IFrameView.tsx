@@ -1,8 +1,9 @@
-import { DEFAULT_IMAGE_WIDTH, Nodes } from '@curvenote/schema';
-import { Node } from 'prosemirror-model';
-import { EditorView, NodeView } from 'prosemirror-view';
+import type { Nodes } from '@curvenote/schema';
+import { DEFAULT_IMAGE_WIDTH } from '@curvenote/schema';
+import type { Node } from 'prosemirror-model';
+import type { EditorView, NodeView } from 'prosemirror-view';
 import { isEditable } from '../prosemirror/plugins/editable';
-import { GetPos } from './types';
+import type { GetPos } from './types';
 import { clickSelectFigure } from './utils';
 
 class IFrameNodeView implements NodeView {

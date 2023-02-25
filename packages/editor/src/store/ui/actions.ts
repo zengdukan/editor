@@ -1,4 +1,4 @@
-import type { PopperPlacementType } from '@material-ui/core';
+import type { PopperPlacementType } from '@mui/material';
 import type { InlineSelection, UIActionTypes } from './types';
 import { SELECT_EDITOR_VIEW, INLINE_SELECTION, SelectionKinds } from './types';
 import type { AppThunk } from '../types';

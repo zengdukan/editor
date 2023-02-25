@@ -1,19 +1,14 @@
 import React from 'react';
-import {
-  FormControl,
-  Select as MuiSelect,
-  MenuItem,
-  styled,
-  makeStyles,
-  createStyles,
-  Grid,
-} from '@material-ui/core';
+import { FormControl, Select as MuiSelect, MenuItem, styled, Grid } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import { findParentNode, replaceParentNodeOfType } from '@curvenote/prosemirror-utils';
-import { Node, NodeType } from 'prosemirror-model';
-import { CaptionKind, nodeNames, Nodes } from '@curvenote/schema';
+import type { Node, NodeType } from 'prosemirror-model';
+import type { Nodes } from '@curvenote/schema';
+import { CaptionKind, nodeNames } from '@curvenote/schema';
 import { useDispatch, useSelector } from 'react-redux';
 import { NodeSelection, TextSelection } from 'prosemirror-state';
-import { LanguageNames, SUPPORTED_LANGUAGES } from '../../views/types';
+import type { LanguageNames } from '../../views/types';
+import { SUPPORTED_LANGUAGES } from '../../views/types';
 import MenuIcon from '../Menu/Icon';
 import {
   applyProsemirrorTransaction,
@@ -23,8 +18,9 @@ import {
 } from '../../store/actions';
 import { updateNodeAttrs } from '../../store/actions/editor';
 import { getEditorState } from '../../store/state/selectors';
-import { Dispatch, State } from '../../store';
-import { ActionProps, getFigure } from './utils';
+import type { Dispatch, State } from '../../store';
+import type { ActionProps } from './utils';
+import { getFigure } from './utils';
 import { getNodeFromSelection } from '../../store/ui/utils';
 
 const useStyles = makeStyles(() =>
@@ -65,7 +61,7 @@ function LanguageSeletionDropdown({
 }) {
   const classes = useStyles();
   return (
-    <FormControl fullWidth>
+    <FormControl variant="standard" fullWidth>
       <Select
         disableUnderline
         onChange={(e: any) => {

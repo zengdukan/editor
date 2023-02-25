@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import type { Theme } from '@material-ui/core';
+import type { Theme } from '@mui/material';
 import * as sidenotes from 'sidenotes';
 import type { EditorState, Transaction } from 'prosemirror-state';
 import type { Node, Schema, Slice } from 'prosemirror-model';

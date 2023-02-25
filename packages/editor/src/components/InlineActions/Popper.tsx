@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { makeStyles, createStyles, Paper, Popper } from '@material-ui/core';
+import { Paper, Popper } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import isEqual from 'lodash.isequal';
 import { useSelector } from 'react-redux';
 import {
@@ -10,7 +11,7 @@ import {
   getInlineActionPlacement,
   isInlineActionOpen,
 } from '../../store/selectors';
-import { State } from '../../store/types';
+import type { State } from '../../store/types';
 import { SelectionKinds } from '../../store/ui/types';
 import { isEditable } from '../../prosemirror/plugins/editable';
 import { usePopper } from './hooks';
@@ -61,7 +62,6 @@ function InlineActions(props: Props) {
     <Popper
       open={open}
       anchorEl={currentEl}
-      transition
       placement={placement}
       popperRef={popperRef}
       className="noprint above-modals"

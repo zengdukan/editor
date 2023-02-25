@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Node } from 'prosemirror-model';
-import { EditorView } from 'prosemirror-view';
-import { ThemeProvider } from '@material-ui/core';
+import type { Node } from 'prosemirror-model';
+import type { EditorView } from 'prosemirror-view';
+import type { Theme } from '@mui/material';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { isEditable } from '../prosemirror/plugins/editable';
 import { opts, ref } from '../connect';
-import { GetPos, NodeViewProps } from './types';
+import type { GetPos, NodeViewProps } from './types';
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 export type Options = {
   wrapper: 'span' | 'div';
@@ -79,21 +85,23 @@ export class ReactWrapper {
     if (options.className) this.dom.classList.add(options.className);
 
     render(
-      <ThemeProvider theme={opts.theme}>
-        <Provider store={ref.store()}>
-          <ClassWrapper
-            {...{
-              node,
-              view,
-              getPos,
-              Child: NodeView,
-            }}
-            ref={(r) => {
-              this.editor = r;
-            }}
-          />
-        </Provider>
-      </ThemeProvider>,
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={opts.theme}>
+          <Provider store={ref.store()}>
+            <ClassWrapper
+              {...{
+                node,
+                view,
+                getPos,
+                Child: NodeView,
+              }}
+              ref={(r) => {
+                this.editor = r;
+              }}
+            />
+          </Provider>
+        </ThemeProvider>
+      </StyledEngineProvider>,
       this.dom,
       async () => {
         const edit = isEditable(this.view.state);

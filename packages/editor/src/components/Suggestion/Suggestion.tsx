@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import type { Theme } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import type { Theme } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { isSuggestionSelected } from '../../store/selectors';
-import { Dispatch, State } from '../../store';
+import type { Dispatch, State } from '../../store';
 import { chooseSelection, selectSuggestion } from '../../store/actions';
 
 const useStyles = makeStyles<Theme, { selectOnHover: boolean }>(() =>

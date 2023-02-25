@@ -1,13 +1,15 @@
 import React from 'react';
 import { isNodeSelection } from '@curvenote/prosemirror-utils';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import TextField from '@mui/material/TextField';
 import { getDatetime } from '@curvenote/schema';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateNodeAttrs } from '../../store/actions';
-import { State, Dispatch } from '../../store/types';
+import type { State, Dispatch } from '../../store/types';
 import { getEditorState } from '../../store/selectors';
-import { ActionProps } from './utils';
+import type { ActionProps } from './utils';
 import { getNodeFromSelection } from '../../store/ui/utils';
 
 function TimeActions(props: ActionProps) {
@@ -31,18 +33,16 @@ function TimeActions(props: ActionProps) {
       ),
     );
   };
+
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <DatePicker
-        variant="static"
-        format="MM/dd/yyyy"
-        margin="normal"
-        id="date-picker-inline"
-        label="Date"
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <StaticDatePicker
+        displayStaticWrapperAs="desktop"
         value={date}
         onChange={onChange}
+        renderInput={(params) => <TextField {...params} />}
       />
-    </MuiPickersUtilsProvider>
+    </LocalizationProvider>
   );
 }
 

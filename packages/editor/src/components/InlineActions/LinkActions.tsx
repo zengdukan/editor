@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { makeStyles, createStyles, Grid, Button, Tooltip } from '@material-ui/core';
-import { types } from '@curvenote/schema';
+import { Grid, Button, Tooltip } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import type { types } from '@curvenote/schema';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuIcon from '../Menu/Icon';
 import {
@@ -11,9 +12,9 @@ import {
   switchLinkType,
   validateUrl,
 } from '../../store/actions';
-import { ActionProps } from './utils';
+import type { ActionProps } from './utils';
 import { getEditorState } from '../../store/state/selectors';
-import { Dispatch, State } from '../../store';
+import type { Dispatch, State } from '../../store';
 import TextAction from './TextAction';
 import { LinkTypeSelect } from './LinkTypeSelect';
 
