@@ -1,4 +1,4 @@
-import type { TaskList, TaskItem, NoAttrs } from '../spec';
+import type { TaskList, TaskItem, NoAttrs } from '../nodespec';
 import { NodeGroups } from './types';
 import type { MyNodeSpec } from './types';
 import type { MdFormatSerialize, TexFormatSerialize } from '../serialize/types';

@@ -1,4 +1,4 @@
-import type { TaskItem, PhrasingContent } from '../spec';
+import type { TaskItem, PhrasingContent } from '../nodespec';
 import { NodeGroups } from './types';
 import type { MyNodeSpec } from './types';
 import type { MdFormatSerialize, TexFormatSerialize } from '../serialize/types';
